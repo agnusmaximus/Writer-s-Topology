@@ -2,6 +2,7 @@ BASE_SIZE = 1
 turn = 1
 last_node = new Object();
 root_node = new Object();
+words = new Array();
 
 /* Graph data abstraction */
 graph = new Object();
@@ -67,13 +68,41 @@ function clean_text(text) {
     return result_text.toLowerCase();
 }
 
+function get_random_node() {    
+    rand = Math.floor(Math.random() * (words.length));
+    word = words[rand];
+
+    return get_node(word);
+}
+
+function detopologize() {
+    result = "";
+    cur_node = get_random_node();
+    count = 0;
+    
+    while (count < 500) {
+	if (cur_node.name != "\n") {
+	    result += cur_node.name + " ";
+	    if (cur_node.hasOwnProperty("children")) {
+		randomnumber = Math.floor(Math.random() * (cur_node.children.length));
+		cur_node = cur_node.children[randomnumber];
+	    }
+	    else {
+		cur_node = get_random_node();
+	    }
+	}
+	count += 1;
+    }
+    
+    $("#writing").val(result);
+}
+
 /* Method: topologize_text
  * -----------------------------
  * Generates a directed graph from the text, 
  * where each node is a word, and each edge
  * leads to a subsequent word.
  */
-
 function topologize_text() {
     
     //Increment user's turn
@@ -110,6 +139,8 @@ function topologize_text() {
 
 	tokens[i] = tokens[i].replace(/^\s+|\s+$/g,'');
 	if (tokens[i] == "") continue;
+
+	words.push(tokens[i]);
 	
 	//Get the node and ndoe to create connection
 	node = get_node(tokens[i]);
