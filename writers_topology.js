@@ -1,14 +1,11 @@
 BASE_SIZE = 1
+turn = 1
+last_node = new Object();
+root_node = new Object();
 
 /* Graph data abstraction */
 graph = new Object();
 myFlower = null;
-
-//Resets the graph and flower object
-function reset() {
-    //graph = new Object();
-    //myFlower = null;
-}
 
 //Gets a node with given name, otherwise returns null
 function get_node(name) {
@@ -79,8 +76,8 @@ function clean_text(text) {
 
 function topologize_text() {
     
-    //Reset
-    reset();
+    //Increment user's turn
+    window.turn += 1;
 
     //Get text from input and clean it
     console.log("Topologizing...")
@@ -93,8 +90,13 @@ function topologize_text() {
     tokens = text.split(" ")
 
     //Create the first node
-    root_node = create_node(tokens[0], 1);
-    last_node = root_node;
+    if (window.turn == 2) {
+	root_node = create_node(tokens[0], 1);
+	last_node = root_node;
+    }
+    
+    console.log(graph);
+    console.log(last_node);
 
     //Average string length
     max_length = -1
@@ -121,9 +123,11 @@ function topologize_text() {
 	else {
 	    node = create_node(tokens[i], BASE_SIZE);
 	    add_child(node_to_connect, node);
-	    last_node = node;
 	}
+	last_node = node;
     }
+
+    last_node = root_node;
     
     //Visualize the graph
     visualize_graph(root_node);
