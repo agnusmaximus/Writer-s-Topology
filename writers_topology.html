@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>Writer's Topology</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="writers_topology.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <h2 style="margin-left:50px">Writer's Topology</h2>
+    <hr/>
+    <div class="container-fluid">
+      <div class="row-fluid">
+	<div class="span5 element">
+	  <div id="text_input">
+	    <textarea style="resize:none;width:300px" rows="20" id="writing" placeholder="Writing goes here..."></textarea>
+	    <br/>
+	    <button class="btn btn-danger" type="button" onclick="topologize_text()">Topologize!</button>
+	  </div>
+	</div>
+	<div class="span6 element">
+	  <div id="topological_graph">
+	  </div>
+	</div>
+      </div>
+    </div>
+    <script src="jquery.js"></script>
+    <script src="json2.js"></script>
+    <script src="d3.js"></script>
+    <script src="d3.geom.js"></script>
+    <script src="d3.layout.js"></script>
+    <script src="CodeFlower.js"></script>
+    <script src="writers_topology.js"></script>
+  </body>
+</html>
