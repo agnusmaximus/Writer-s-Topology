@@ -20,7 +20,7 @@ var CodeFlower = function(selector, w, h) {
 
   this.force = d3.layout.force()
     .on("tick", this.tick.bind(this))
-    .charge(function(d) { return -20 - Math.log(d.size * d.size * d.size) * d.size * 5; })
+    .charge(function(d) { return -20 - Math.log(d.size * d.size * d.size) * d.size; })
 	.linkDistance(function(d) { return 55; })
     .size([h, w]);
 };
