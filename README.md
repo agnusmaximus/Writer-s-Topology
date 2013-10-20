@@ -1,3 +1,5 @@
+<h1>Writer's Topology</h1>
+
 Visualize text as a graph of nodes and connections.
 
 Nodes represent words in text, and are larger if they occur more frequently. 
