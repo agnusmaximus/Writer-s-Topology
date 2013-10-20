@@ -104,9 +104,6 @@ function detopologize() {
  * leads to a subsequent word.
  */
 function topologize_text() {
-    
-    //Increment user's turn
-    window.turn += 1;
 
     //Get text from input and clean it
     console.log("Topologizing...")
@@ -114,6 +111,9 @@ function topologize_text() {
 
     //Don't do anything with empty strings
     if (text == "") return;
+
+    //Increment user's turn
+    window.turn += 1;
 
     //Split text into tokens
     tokens = text.split(" ")
