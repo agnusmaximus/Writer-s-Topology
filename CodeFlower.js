@@ -20,8 +20,8 @@ var CodeFlower = function(selector, w, h) {
 
   this.force = d3.layout.force()
     .on("tick", this.tick.bind(this))
-    .charge(function(d) { return -20 - Math.log(d.size * d.size * d.size) * d.size; })
-	.linkDistance(function(d) { return 85; })
+    .charge(function(d) { return -20 - Math.log(d.size * d.size * d.size) * d.size * 5; })
+	.linkDistance(function(d) { return 55; })
     .size([h, w]);
 };
 
@@ -60,7 +60,7 @@ CodeFlower.prototype.update = function(json) {
     .attr("y2", function(d) { return d.target.y; });
 
   // Exit any old links.
-    //this.link.exit().remove();
+    this.link.exit().remove();
 
   // Update the nodes
   this.node = this.svg.selectAll("circle.node")
@@ -88,7 +88,7 @@ CodeFlower.prototype.update = function(json) {
     .on("mouseout", this.mouseout.bind(this));
 
     // Exit any old nodes
-    //this.node.exit().remove();
+    this.node.exit().remove();
 
     this.text = this.svg.append('svg:text')
 	.attr('class', 'nodetext')
@@ -100,8 +100,11 @@ CodeFlower.prototype.update = function(json) {
 
 CodeFlower.prototype.flatten = function(root) {
   var nodes = [], i = 0;
+  used = new Object()
 
   function recurse(node) {
+      if (used.hasOwnProperty(node.name)) return;
+      used[node.name] = 1;
       if (node.children) {
 	  node.children.reduce(function(p, v) { return p + recurse(v);}, 0);
       }
