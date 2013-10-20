@@ -153,6 +153,7 @@ function topologize_text() {
 	//otherwise, create the node and make a connection
 	else {
 	    node = create_node(tokens[i], BASE_SIZE);
+	    //add_child(node_to_connect, node);
 	}
 	
 	add_child(node_to_connect, node);
